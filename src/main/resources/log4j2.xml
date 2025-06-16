@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <!-- RoutingAppender 根據 subscriberId 動態建立檔案 -->
+        <Routing name="SubscriberRouting">
+            <Routes pattern="$${ctx:subscriberId}">
+                <Route>
+                    <RollingFile name="SubscriberFile"
+                                 fileName="logs/${ctx:subscriberId}.log"
+                                 filePattern="logs/${ctx:subscriberId}-%d{yyyy-MM-dd}.log.gz">
+                        <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+                        <Policies>
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                        </Policies>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+    </Appenders>
+
+    <Loggers>
+        <!-- 根據 subscriberId 設定 logger -->
+        <Logger name="com.example.subscriber" level="info" additivity="false">
+            <AppenderRef ref="SubscriberRouting"/>
+        </Logger>
+
+        <Root level="info">
+            <!-- 其他 Appender -->
+        </Root>
+    </Loggers>
+</Configuration>
