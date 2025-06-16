@@ -20,4 +20,4 @@ docker build -t redis-pub-sub-demo .
 
 # Start the Spring Boot app container with the correct environment variable and network settings
 echo "Starting Spring Boot app container..."
-docker run --network redis-net -e REDIS_URL=redis -p 8080:8080 redis-pub-sub-demo
+docker run --name redis-sub-pub-demo --network redis-net -e REDIS_URL=redis -p 8080:8080 redis-pub-sub-demo
