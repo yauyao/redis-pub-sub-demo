@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y git maven
 WORKDIR /app
 
 # Clone the repository
-RUN git clone https://github.com/yauyao/redis-pub-sub-demo.git .
+RUN git clone --depth=1  https://github.com/yauyao/redis-pub-sub-demo.git .
 
 # Build the project using Maven
 RUN mvn clean package -DskipTests

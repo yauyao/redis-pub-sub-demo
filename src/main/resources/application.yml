@@ -3,7 +3,7 @@ spring:
     name: redis_pub_sub_demo
   data:
     redis:
-      host: 192.168.0.8
+      host: ${REDIS_URL}
       port: 6379
 
 logging:
